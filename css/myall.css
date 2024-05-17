@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
+
+/* 多種字體 */
+/* @import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+TC:wght@100..900&family=Yusei+Magic&family=Zen+Maru+Gothic&display=swap') */
+
+body{
+    font-family: "Noto Sans TC", sans-serif;
+}
+
+.fw-900{
+    font-weight: 900;
+}
+.fw-800{
+    font-weight: 800;
+}
+.fw-700{
+    font-weight: 700;
+}
+.fw-600{
+    font-weight: 600;
+}
+.fw-500{
+    font-weight: 500;
+}
+.fw-400{
+    font-weight: 400;
+}
+.fw-300{
+    font-weight: 300;
+}
+.fw-200{
+    font-weight: 200;
+}
+.fw-100{
+    font-weight: 100;
+}
+
+:root{
+    --mycolor01: #e2dcd9;
+    --mycolor01-1:#8f8681;
+    --mycolor01-2:#A67F78;
+    --mycolor01-3:#32435F;
+    --mycolor02: #d0ebe0;
+    --mycolor03: #7ac4ad;
+    --mycolor04: #008c6a;
+    --mycolor05: #0e3e1e;
+    --mycolor06:#d2b6d9;
+    --mycolor07:#a23f97;
+    --mycolor08:#fbd3d0;
+    --mycolor09:#f4909e;
+    --mycolor09-1:#ffc2c3;
+    --mycolor09-2:#fe7773;
+    --mycolor09-3:#e81e25;
+    --mycolor09-4:#0e0301;
+    --mycolor10:#bdbdbd;
+    --mycolor11:#5580a1;
+    --mycolor11-1:#d1dddb;
+    --mycolor11-2:#85b8cb;
+    --mycolor11-3:#1d6a96;
+    --mycolor11-4:#283b42;
+    --mycolor12:#cc8b4d;
+    --mycolor12-1:#d5d2c1;
+    --mycolor12-2:#bd8e62;
+    --mycolor12-3:#a46843;
+    --mycolor12-4:#370d00;
+    --mycolor13:#3b1b2a;
+    --mycolor14:#FFD954;
+    --mycolor14-1:#e4b660;
+    --mycolor14-2:#f2ab39;
+    --mycolor14-3:#69491a;
+    --bottom01:#612b7d;
+    --bottom02:#29103a;
+
+    --bgc01: #ead7bd;
+    --bgc02: #cbd3da;
+}
+
+.bg-cover{
+    background-position: center center;
+    background-size: cover;
+}
+
+
+/* 改天可以使用 class="table-rwd" */
+@media screen and (max-width:768px) {
+    .table-rwd thead {
+        display: none;
+    }
+
+    .table-rwd tbody tr {
+        display: block;
+        border: 2px solid var(--bgc01);
+        margin-top: 5px;
+    }
+
+    .table-rwd tbody tr td {
+        display: block;
+        overflow: hidden;
+    }
+
+    .table-rwd tbody tr td::before {
+        content: attr(data-th) " : ";
+        color: var(--mycolor09);
+        font-weight: 900;
+        display: block;
+        float: left;
+        width: 4em;
+        text-align: right;
+        padding-right: 1em;
+    }
+    .table-rwd tbody tr td span.table-col{
+        display: block;
+        float: left;
+        width: calc(100% - 4em);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

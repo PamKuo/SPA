@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPA-cat cafe</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/myall.css">
+    <link rel="stylesheet" href="./css/all.min.css">
+    <link rel="stylesheet" href="./css/animate.min.css">
+    <!-- SPA (single-page application)一頁式網頁 像原生app -->
+</head>
+<style>
+    .timeline-section {
+        position: relative;
+    }
+
+    .timeline-section::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        bottom: 0;
+        background-color: #ccc;
+        width: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .caption-text {
+        background-color: rgb(0, 0, 0, 0.3);
+    }
+
+    .text-cover {
+        background-color: rgb(0, 0, 0, 0.3);
+    }
+
+    .timeline-section2 {
+        position: relative;
+    }
+
+    .timeline-section2::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        bottom: 0;
+        width: 5px;
+        background-color: var(--mycolor02);
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .timeline-section-pointer {
+        position: relative;
+    }
+
+    .timeline-section-pointer::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        width: 20px;
+        height: 20px;
+        background-color: var(--mycolor04);
+        border: 5px solid var(--mycolor02);
+        border-radius: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .timeline-section-pointer:hover::before {
+        background-color: var(--mycolor02);
+        border: 5px solid var(--mycolor04);
+    }
+
+    #word-cloud {
+        width: 100%;
+        height: 400px;
+        /* border: 1px solid #ddd; */
+        margin:10px;
+    }
+
+    /* 按鈕配色 */
+    /* 登入/確認鈕 咖啡色系 */
+    .btn-p-01{
+        color: var(--mycolor14-3);
+        background-color: var(--mycolor12-1);
+    }
+    .btn-p-01:hover{
+        color: var(--mycolor12-1);
+        background-color: var(--mycolor14-3);
+    }
+
+    .bg-p-01{
+        background-color: var(--mycolor14-3);
+    }
+    /* 取消鈕 紅色系 */
+    .btn-p-02{
+        color: var(--mycolor09-2);
+        border: 1px solid var(--mycolor09-2);
+    }
+    .btn-p-02:hover{
+        color: var(--mycolor09-1);
+        background-color: var(--mycolor09-2);
+    }
+    /* 註冊鈕 紫色系 */
+    .btn-p-03{
+        color: var(--mycolor07);
+        background-color: var(--mycolor06);
+    }
+    .btn-p-03:hover{
+        color: var(--mycolor06);
+        background-color: var(--mycolor07);
+    }
+    .bg-p-03{
+        background-color: var(--mycolor07);
+    }
+    /* 查看更多鈕 綠色系*/
+    .btn-p-04{
+        color: var(--mycolor04);
+        border: 1px solid var(--mycolor04);
+    }
+    .btn-p-04:hover{
+        color: var(--mycolor02);
+        background-color: var(--mycolor04);
+    }
+    /* 加入我們 字 */
+    .text-s11-join{
+        color: var(--mycolor01);
+        background-color: var(--mycolor05);
+    }
+
+    @media screen and (max-width: 768px) {
+        .timeline-section2::before {
+            left: -10px;
+            transform: none;
+            width: 5px;
+        }
+
+        .timeline-section-pointer::before {
+            left: -5px;
+            transform: none;
+        }
+
+        .text-s07,
+        .text-s09,
+        .text-s11 {
+            z-index: 10;
+            background-color: rgb(0, 0, 0, 0.3);
+            color: aliceblue;
+            margin: 15px;
+            padding: 15px;
+        }
+
+        .nodisplay, .s12-link, .gone {
+            display: none;
+        }
+        /* 如何在手機板上面 只有顯示圖案，不顯示文字 */
+    }
+</style>
+
+<body class="bg-light">
+    <!-- section 01 -->
+    <section style="background-color: var(--mycolor06);">
+        <div class="container">
+            <div class="text-end">
+                <a href="https://www.facebook.com/" target="_blank" id="FB"><i class="fa-brands fa-square-facebook "
+                        style="color: var(--mycolor01-3);"></i></a>
+                <a href="https://www.x.com/" target="_blank" id="TW"><i class="fa-brands fa-x-twitter"
+                        style="color: var(--mycolor11-1);"></i></a>
+            </div>
+        </div>
+    </section>
+    <!-- section 02 -->
+    <section>
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <!-- 多了bg-dark navbar-dark -->
+            <div class="container">
+                <!-- 把fluid取消，內容才會在中間 -->
+                <!-- 小圖示 -->
+                <a class="navbar-brand"><i class="fa-solid fa-paw wow animate__lightSpeedInLeft" style="color: var(--mycolor09-3);" data-wow-duration="3s"
+                        data-wow-delay="0s" data-wow-iteration="1"></i></a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">首頁</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#s04">公司介紹</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                服務介紹
+                            </a>
+                            <ul class="dropdown-menu" style="background-color: var(--mycolor01);">
+                                <li><a class="dropdown-item" href="#s05">服務流程</a></li>
+                                <li><a class="dropdown-item" href="#s06">中心理念</a></li>
+                                <li><a class="dropdown-item" href="#s07">店內故事</a></li>                                
+                                <li><a class="dropdown-item" href="#s14">店貓鳴仔</a></li>
+                                <li><a class="dropdown-item" href="#s08">服務項目</a></li>
+                                <!-- <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                            </ul>
+                        </li>                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                前往須知
+                            </a>
+                            <ul class="dropdown-menu" style="background-color: var(--mycolor01);">
+                                <li><a class="dropdown-item" href="#s09">活動辦法</a></li>
+                                <li><a class="dropdown-item" href="#s10">填寫表格</a></li>
+                                <li><a class="dropdown-item" href="#s13">常見問題</a></li>
+                                <!-- <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#s11">加入我們</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#s12">相關連結</a>
+                        </li>
+                    </ul>
+                    <!-- 設登入與註冊按鈕 -->
+                    <div>
+                        <button class="btn btn-p-01" data-bs-toggle="modal" data-bs-target="#loginModal">登入</button>
+                        <button class="btn btn-p-03" data-bs-toggle="modal"
+                            data-bs-target="#registerModal">註冊</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </section>
+    <!-- loginModal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-p-01">
+                    <h1 class="modal-title fs-5 text-white fw-700" id="exampleModalLabel">會員登入</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="" class="form-label">帳號</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">密碼</label>
+                        <input type="password" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-p-02" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-p-01">確認</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- registerModal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <!-- modal-xl 預設xl 會比預設大 -->
+            <div class="modal-content">
+                <div class="modal-header bg-p-03">
+                    <h1 class="modal-title fs-5 text-white fw-700" id="exampleModalLabel">註冊帳號</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row timeline-section">
+                        <!-- 在兩者之間劃出一條線 timeline-section使用偽元素 -->
+                        <div class="col-6">
+                            <!-- 將排版切一半 -->
+                            <div class="h3 fw-900 text-center">會員守則</div>
+                            <p>會員註冊是我們社群中的一個重要步驟，請遵守以下規範：</p>
+                            <p>1.隱私保護：我們尊重您的隱私，不會分享您的個人資訊給第三方。</p>
+                            <p>2.正當使用：您的帳戶僅供個人使用，不可轉讓或出借給他人使用。</p>
+                            <p>3.尊重規則：請遵守社群守則，不要發布任何不當言論或違法內容。</p>
+                            <p>在註冊時，請務必閱讀並理解我們的服務條款和隱私政策。這些條款和政策將規範您與我們平台的使用，請務必遵守。這些規範有助於營造一個安全、友好的社群環境，請您配合遵守。</p>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input">
+                                <label for="" class="form-check-label">同意</label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="" class="form-label">帳號</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">密碼</label>
+                                <input type="password" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">確認密碼</label>
+                                <input type="password" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">姓名</label>
+                                <input type="text" class="form-control" name="username" id="username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">email</label>
+                                <input type="email" class="form-control" name="email" id="email">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-p-02" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-p-03">確認</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- section 03 -->
+    <section>
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active bg-cover"
+                    style="background-image: url(./images/cat-slide01.avif); height: 90vh;">
+                    <!-- active是指誰先顯示。用圖片的話，用背景圖設定會更方便 -->
+                    <!-- <img src="./images/landscape04.avif" class="d-block w-100" alt="..."> -->
+                    <div class="carousel-caption d-none d-md-block caption-text wow animate__rollIn"
+                        data-wow-duration="1.5s" data-wow-delay="0s" data-wow-iteration="1">
+                        <!-- 新增一個caption-text讓文字背景有顏色，不被背景圖影響 -->
+                        <h5>咖啡相伴</h5>
+                        <p>咖啡輕食：盡情享受美味，與可愛的貓咪分享快樂。</p>
+                    </div>
+                </div>
+                <div class="carousel-item bg-cover"
+                    style="background-image: url(./images/cat-slide02.avif); height: 90vh;">
+                    <!-- <img src="./images/landscape05.avif" class="d-block w-100" alt="..."> -->
+                    <div class="carousel-caption d-none d-md-block caption-text wow animate__rollIn"
+                        data-wow-duration="1.5s" data-wow-delay="0s" data-wow-iteration="1">
+                        <h5>溫馨空間</h5>
+                        <p>互動伴侶：和喵星人共度美好時光。</p>
+                    </div>
+                </div>
+                <div class="carousel-item bg-cover"
+                    style="background-image: url(./images/cat-slide03.avif); height: 90vh;">
+                    <!-- <img src="./images/landscape03.avif" class="d-block w-100" alt="..."> -->
+                    <div class="carousel-caption d-none d-md-block caption-text wow animate__rollIn"
+                        data-wow-duration="1.5s" data-wow-delay="0s" data-wow-iteration="1">
+                        <h5>悠閒時光</h5>
+                        <p>貓咪陪伴：在輕鬆的氛圍中，盡情享受與貓咪的互動。</p>
+                    </div>
+                </div>
+                <div class="carousel-item bg-cover"
+                    style="background-image: url(./images/cat-slide04.avif); height: 90vh;">
+                    <!-- <img src="./images/landscape03.avif" class="d-block w-100" alt="..."> -->
+                    <div class="carousel-caption d-none d-md-block caption-text wow animate__rollIn"
+                        data-wow-duration="1.5s" data-wow-delay="0s" data-wow-iteration="1">
+                        <h5>心靈角落</h5>
+                        <p>甜點休閒：在溫馨的環境中，與可愛的貓咪共同度過休閒時光。</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+    <!-- section 04 -->
+    <section id="s04">
+        <div class="row align-items-center">
+            <div class="col-md-5"
+                style="background-image: url(./images/cat-s04-01.avif); height: 600px; background-attachment: fixed; background-position: -500px 0px; background-size: cover; background-repeat: no-repeat; ">
+            </div>
+            <div class="col-md-7 p-5 wow animate__fadeInTopRight " data-wow-duration="3s" data-wow-delay="0s"
+                data-wow-iteration="1">
+                <h1>創立於西元1860年
+                    <span style="color: var(--mycolor04)">貓咪陪伴咖啡館</span>
+                </h1>
+                <h1 class="mb-3">絕對溫馨的放鬆場合</h1>
+                <p class="mb-1">店內環境充滿著柔和的燈光，讓你仿佛置身於家中的舒適客廳，隨時都能感受到溫暖的氛圍。</p>
+                <p class="mb-1">貓咪們在店內悠閒自在地漫步，或慵懶地躺在舒適的沙發上打盹，為整個空間增添了一絲親切的氣息。</p>
+                <p class="mb-1">每個角落都散發著愉悅的氛圍，輕柔的音樂與咖啡香氣相互交融，讓你感受到無比的放鬆與安寧。</p>
+                <div class="row mt-5">
+                    <div class="col-md-3">
+                        <h4 class="wow animate__pulse" data-wow-duration="3s" data-wow-delay="0s"
+                            data-wow-iteration="1">認養活動</h4>
+                        <h2 class="fw-800 counter01" style="color: var(--mycolor09-2)">500<span class="h4 text-muted">/場</span></h2>
+                    </div>
+                    <div class="col-md-3">
+                        <h4 class="wow animate__pulse" data-wow-duration="3s" data-wow-delay="0s"
+                            data-wow-iteration="1">社區認證獎項</h4>
+                        <h2 class="fw-800 counter02" style="color: var(--mycolor11-2)">17<span class="h4 text-muted">/項</span></h2>
+                    </div>
+                    <div class="col-md-3">
+                        <h4 class="wow animate__pulse" data-wow-duration="3s" data-wow-delay="0s"
+                            data-wow-iteration="1">專業貓貓認證</h4>
+                        <h2 class="fw-800 counter03" style="color: var(--mycolor14-2)">4<span class="h4 text-muted">/個</span></h2>
+                    </div>
+                    <div class="col-md-3">
+                        <h4 class="wow animate__pulse" data-wow-duration="3s" data-wow-delay="0s"
+                            data-wow-iteration="1">公司據點</h4>
+                        <h2 class="fw-800 counter04" style="color: var(--mycolor06)">6<span class="h4 text-muted">/個</span></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section 05 -->
+    <section id="s05" class="bg-dark py-5 bg-cover"
+        style="background-image: url(./images/cat-s05-a01.avif); background-attachment: fixed;">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- 這格的比例是3比8 -->
+                <div class="col-md-3 text-white py-5 me-auto">
+                    <div class="text-cover p-3 rounded rounded-4 shadow-lg wow animate__fadeInUp" data-wow-duration="3s"
+                        data-wow-delay="0s" data-wow-iteration="1">
+                        <h2>店內流程</h2>
+                        <p>在我們的貓咪咖啡館，我們希望您能夠盡情放鬆，與可愛的貓咪們共度美好時光。為了確保每位顧客都能夠享受到愉快的體驗，我們建議您遵守一些簡單的規則。請保持安靜，尊重貓咪們的休息時間，並注意不要打擾到其他顧客。另外，請勿強行摸動貓咪，讓牠們自由自在地來往於空間中。我們相信，遵守這些規則將會為您帶來一段愉快難忘的體驗。
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-8 py-5 wow animate__fadeInRight" data-wow-duration="3s" data-wow-delay="0s"
+                    data-wow-iteration="1">
+                    <div class="container ">
+                        <div class="timeline-section2">
+                            <div class="row mt-3 align-items-center timeline-section-pointer">
+                                <div class="col-md-6 text-white">
+                                    <div class="text-cover p-3 rounded rounded-4 shadow-lg">
+                                        <h2>1.預約進店</h2>
+                                        <p>提前預約可確保您有足夠的時間在咖啡館享受美好時光，避免等待排隊的情況發生。</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="bg-cover rounded rounded-4"
+                                        style="background-image: url(./images/cat-s05-b01.avif); height:260px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 align-items-center flex-row-reverse timeline-section-pointer">
+                                <div class="col-md-6 text-white">
+                                    <div class="text-cover p-3 rounded rounded-4 shadow-lg">
+                                        <h2>2.點菜</h2>
+                                        <p>在菜單上挑選您喜歡的輕食或飲料，品嚐我們特製的美味佳餚，讓您的味蕾得到滿足。
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="bg-cover rounded rounded-4"
+                                        style="background-image: url(./images/cat-s05-b02.avif); height:260px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 align-items-center timeline-section-pointer">
+                                <div class="col-md-6 text-white">
+                                    <div class="text-cover p-3 rounded rounded-4 shadow-lg">
+                                        <h2>3.溫柔對待貓咪</h2>
+                                        <p>請在與貓咪互動時保持溫柔，如果貓咪正在睡覺，請不要打擾牠們，讓牠們享受安寧的休息時光。
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="bg-cover rounded rounded-4"
+                                        style="background-image: url(./images/cat-s05-b03.avif); height:260px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 align-items-center flex-row-reverse timeline-section-pointer">
+                                <div class="col-md-6 text-white">
+                                    <div class="text-cover p-3 rounded rounded-4 shadow-lg">
+                                        <h2>4.離開前填寫評價</h2>
+                                        <p>在離開之前，請填寫您的評價，我們將不勝感激地接受您的意見並提供神秘小禮物作為感謝。
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="bg-cover rounded rounded-4"
+                                        style="background-image: url(./images/cat-s05-b04.avif); height:260px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section 06 -->
+    <section class="py-5" style="background-color: var(--bgc02);" id="s06">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-white text-center wow animate__backInLeft" data-wow-duration="1.5s"
+                    data-wow-delay="0s" data-wow-iteration="1">
+                    <!-- fa-8x放大 -->
+                    <i class="fa-solid fa-hand-holding-droplet fa-8x  mb-3" style="color: var(--mycolor03)"></i>
+                    <h3 class="fw-900 nodisplay">環境友善</h3>
+                    <p class="nodisplay">用心選擇環保餐具，與您一同守護地球的美好。</p>
+                </div>
+                <div class="col-md-4 text-white text-center wow animate__backInDown" data-wow-duration="1.5s"
+                    data-wow-delay="0s" data-wow-iteration="1">
+                    <!-- fa-8x放大 -->
+                    <i class="fa-solid fa-cat fa-8x mb-3" style="color: var(--mycolor14)"></i>
+                    <h3 class="fw-900 nodisplay">貓咪之家</h3>
+                    <p class="nodisplay">提供溫馨舒適的飼養環境，讓每隻貓咪都感受到家的溫暖。</p>
+                </div>
+                <div class="col-md-4 text-white text-center wow animate__backInRight" data-wow-duration="1.5s"
+                    data-wow-delay="0s" data-wow-iteration="1">
+                    <!-- fa-8x放大 -->
+                    <i class="fa-solid fa-champagne-glasses fa-8x mb-3" style="color: var(--mycolor01-2)"></i>
+                    <h3 class="fw-900 nodisplay">客戶至上</h3>
+                    <p class="nodisplay">讓您在輕鬆愉快的氛圍中與可愛的貓咪互動，同時療癒身心，是我們最大的榮幸。</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- section 07 -->
+    <section class="bg-light" style="position: relative;" id="s07">
+        <div class="row">
+            <!-- 這邊左邊的圖案靠右邊的文字去撐開高度。需要用定位才能貼齊頁面 -->
+            <div class="col-md-5 bg-cover"
+                style="background-image: url(./images/cat-s07-01.avif); position: absolute; top: 0; bottom: 0;"></div>
+        </div>
+        <!-- 圖片與畫面的比例7:5 -->
+        <div class="container">
+            <div class="row justify-content-end">
+                <!-- justify-content-end靠右對齊 -->
+                <div class="col-md-7 p-3 text-s07 wow animate__tada" data-wow-duration="2s" data-wow-delay="0s"
+                    data-wow-iteration="1">
+
+                    <h3 class="fw-900">舒緩心靈的天堂：探索最令人放鬆的貓咪咖啡廳</h3>
+                    <p>在城市的繁忙喧囂之中，人們時常渴望找到一處可以放鬆身心的天堂，一個能夠與可愛的毛孩們共度時光的寧靜角落。而在多倫多，這樣一家令人心曠神怡的貓咪咖啡廳正悄然崛起。這裡不僅擁有一隻特別有靈性的貓咪，更提供著傑出的西式餐點和手工製作的天然飲料，深受年輕族群的喜愛。
+                    </p>
+                    <p class="gone">除了美食，這裡更是一處充滿靈性的所在。貓咪們似乎能夠感知人們的情緒，當你感到難過或煩惱時，牠們會主動走近，用溫柔的動作安撫你的情緒，給予你無盡的慰藉。在這裡，你不僅可以享受美食、美酒，更可以找到內心的寧靜與平靜。
+                    </p>
+                    <p class="gone">我們不僅是提供一個放鬆身心的天堂，更是一個與貓咪共度美好時光的理想場所。無論是享用美食、與貓咪互動，還是尋找內心的平靜，這裡都能滿足你的一切需求。來到這裡，讓我們放下煩惱，與可愛的貓咪們一同感受生活的美好！
+                    </p>
+                    <button class="btn btn-p-04">查看更多</button>
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            <h3 class="fw-500">精緻餐點</h3>
+                            <p>我們以其傑出的餐點聞名於城中。每道西式料理都經過精心設計，選用新鮮食材，呈現出美味與營養兼具的佳餚。<span class="gone">無論是法式焗烤麵包還是義式海鮮義大利麵，每一口都帶來無限的享受。而在飲品方面，這裡更是一絕。每一杯咖啡、手工調製的飲料都散發著迷人的香氣，口感濃郁醇厚，讓人回味無窮。</span>
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <h3 class="fw-500">熱門打卡景點</h3>
+                            <p>此外我們這家值得驕傲的店，也在社交媒體上掀起了一陣熱潮。<span class="gone">年輕人紛紛在Instagram上分享著他們在這裡的美好時光，讚嘆這裡的舒適環境、美味佳餚和可愛的貓咪們。這裡已經成為了城市中的一個熱門打卡點，吸引著越來越多的遊客前來朝聖哦！</span> 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section 14 店長貓咪 -->
+    <section class="bg-light mt-4 mb-4" style="position: relative;" id="s14">
+        <div class="row justify-content-end">
+            <div class="col-md-5 bg-cover"
+                style="background-image: url(./images/cat-s14-01.avif); position: absolute; top: 0; bottom: 0;"></div>
+        </div>
+        <!-- 圖片與畫面的比例7:5 -->
+        <div class="container">
+            <div class="row">
+                <!-- justify-content-end靠右對齊 -->
+                <div class="col-md-7 p-3 text-s07 wow animate__tada" data-wow-duration="2s" data-wow-delay="0s"
+                    data-wow-iteration="1">
+
+                    <h3 class="fw-900">店貓鳴仔：貓咪咖啡廳的活力之星</h3>
+                    <p>在我們的貓咪咖啡廳，有一位特別的店貓，他的名字叫鳴仔。今年五歲的鳴仔是一隻充滿活力且非常喜愛人類的小夥伴。在店內，鳴仔總是能吸引所有人的注意力，無論是熟客還是新來的顧客，都會被他那可愛的模樣和熱情的性格所打動。
+                    </p>
+
+                    <p class="gone">鳴仔最喜歡的食物是肉泥，每當我們拿出他的最愛，他就會興奮地跑過來，眼神中充滿了期待。不僅如此，他還非常喜歡跳上人類的腿，在您享受咖啡和輕食的同時，感受他那溫暖的陪伴。鳴仔的存在讓咖啡廳充滿了歡樂和溫馨，成為了我們店內的明星和象徵。
+                    </p>
+
+                    <p>如果您想要在忙碌的生活中找到一片放鬆的天地，歡迎來我們的貓咪咖啡廳，與鳴仔一起度過美好時光。無論是撫摸他柔軟的毛，還是看他在店內自由自在地玩耍，您都會感受到無比的治癒和快樂。</p>
+
+                </div>
+            </div>
+        </div>
+       
+    </section>
+    <!-- section 08 -->
+    <section id="s08">
+        <div class="container">
+            <div class="row">
+                <div class="display-2 fw-800 text-center" style="color: var(--mycolor04);">公司四大服務項目</div>
+                <div class="col-md-6 mt-3 wow animate__fadeInTopLeft" data-wow-duration="4s" data-wow-delay="0s"
+                    data-wow-iteration="1">
+                    <div class="d-flex">
+                        <!-- d-flex和d-inline-flex：
+                        使用 display 通用類別來創建一個 flexbox 容器，並將 直屬內元素 轉換為 flex 屬性。 -->
+                        <i class="fa-solid fa-hand-sparkles fa-7x me-4 mt-5"></i>
+                        <div>
+                            <div class="h2 fw-800 text-center">貓友交流班</div>
+                            <p>貓友交流班是我們咖啡廳的精彩項目之一，我們將以手把手的方式教授您如何與貓咪建立親密的互動關係。<span class="gone">從基本的貓咪行為理解到如何與貓咪進行互動遊戲，我們的專業教練將帶您一步步探索，讓您成為真正的貓友。</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-3 wow animate__fadeInTopRight" data-wow-duration="4s" data-wow-delay="0s"
+                    data-wow-iteration="1">
+                    <div class="d-flex">
+                        <i class="fa-solid fa-utensils fa-9x me-4 mt-5"></i>
+                        <div>
+                            <div class="h2 fw-800 text-center">美食饗宴</div>
+                            <p>我們的咖啡廳不僅提供美味的咖啡和手工飲料，還有專業的料理技術課程。<span class="gone">在這裡，您可以參加我們的烹飪工作坊，學習製作各種美味的西式料理。無論您是初學者還是料理高手，我們都將帶您體驗一場美食和創意的盛宴。</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mt-3 wow animate__fadeInBottomLeft" data-wow-duration="4s" data-wow-delay="0s"
+                    data-wow-iteration="1">
+                    <div class="d-flex">
+                        <i class="fa-solid fa-book-open fa-7x me-4 mt-5"></i>
+                        <div>
+                            <div class="h2 fw-800 text-center">貓咪知識天地</div>
+                            <p>貓咪知識天地是我們咖啡廳的一個獨特之處，我們提供豐富的貓咪相關書籍供您閱覽。<span class="gone">從飼養技巧到貓咪行為學，您可以在這裡找到各種有趣且實用的資訊。讓您更深入地了解貓咪的世界，與您的貓伙伴建立更親密的關係。</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-3 wow animate__fadeInBottomRight" data-wow-duration="4s" data-wow-delay="0s"
+                    data-wow-iteration="1">
+                    <div class="d-flex">
+                        <i class="fa-solid fa-glasses fa-7x me-4 mt-5"></i>
+                        <div>
+                            <div class="h2 fw-800 text-center">貓咪領養與照顧指南</div>
+                            <p>如果您考慮要領養一隻可愛的貓咪，我們提供專業的領養和照顧指南。<span class="gone">從選擇適合您家庭的貓咪品種到日常餵養和護理技巧，我們將為您提供全面的指導和支持，讓您和您的貓咪能夠擁有幸福美好的生活。</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section 15 word cloud -->
+    <section id="s15">
+        <div class="container">
+            <div class="row">
+                <div id="word-cloud" class="wow animate__zoomIn" data-wow-duration="4s" data-wow-delay="0s"
+                    data-wow-iteration="1"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- section 09 類似section07-->
+    <section style="position: relative;" id="s09" class="m-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 text-s09 ">
+                    <dl class="row">
+                        <dt class="col-sm-3">參加人數</dt>
+                        <dd class="col-sm-9">3人~5人</dd>
+
+                        <dt class="col-sm-3">收費方式</dt>
+                        <dd class="col-sm-9">
+                            <p>300NTD/人</p>
+                        </dd>
+
+                        <dt class="col-sm-3">上課時間</dt>
+                        <dd class="col-sm-9">每日分為三個階段，分別為中午、傍晚和夜晚，每個階段30分鐘。具體時間取決於集滿3~5人後的安排。</dd>
+
+                        <dt class="col-sm-3 text-truncate">注意事項</dt>
+                        <dd class="col-sm-9">請上課者不要做出太大的動作，以免驚嚇到貓咪。</dd>
+                    </dl>
+                </div>
+            </div>
+
+        </div>
+        <div class="row justify-content-end">
+            <!-- 這個row要跟文字的row不同 文字才不會被背景吃掉 -->
+            <div class="col-md-5 bg-cover wow animate__flipInY" data-wow-duration="3s" data-wow-delay="0s"
+                data-wow-iteration="1"
+                style="background-image: url(./images/cat-s09-01.avif); position: absolute; top: 0; bottom: 0;"></div>
+        </div>
+    </section>
+    <!-- section13 Q&A -->
+    <section id="s13">
+        <div class="container">
+            <div class="row">
+                <div class="display-2 fw-800 text-center" style="color: var(--mycolor09-2);">常見問題</div>
+                <div class="col-md-6 mt-3 wow animate__fadeInTopLeft" data-wow-duration="4s" data-wow-delay="0s"
+                    data-wow-iteration="1">
+                    <div class="d-flex">
+                        <div>
+                            <div class="h2 fw-800 text-center">Q: 如何聯絡我們？</div>
+                            <p>您可以通過以下幾種方式聯絡我們：<br>
+                                官網：訪問我們的官方網站，使用聯絡表單或直接發送電子郵件。<br>
+                                Facebook：在我們的Facebook頁面留言或發送私訊，我們的團隊會盡快回應。<br>
+                                推特：在推特上@我們的官方帳號，或發送私訊，我們會及時回覆您的問題。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-3 wow animate__fadeInTopRight" data-wow-duration="4s" data-wow-delay="0s"
+                    data-wow-iteration="1">
+                    <div class="d-flex">
+                        <div>
+                            <div class="h2 fw-800 text-center">Q: 最晚什麼時候可以預約？</div>
+                            <p>為確保我們能為您提供最佳的服務，請在預約日的兩天前完成預約。我們會在預約日前一天通過電子郵件與您確認，確保您的預約無誤。<span class="gone">如果有任何變更，請及早通知我們。</span> 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mt-3 wow animate__fadeInBottomLeft" data-wow-duration="4s" data-wow-delay="0s"
+                    data-wow-iteration="1">
+                    <div class="d-flex">
+                        <div>
+                            <div class="h2 fw-800 text-center">Q: 可以在貓咪咖啡廳裡待多久？</div>
+                            <p>我們希望您在這裡度過愉快的時光，因此：<br>
+
+                                平日：我們不限制您的停留時間<span class="gone">，您可以盡情享受與貓咪的美好時光，品嘗美食和咖啡</span>。<br>
+                                假日：由於假日人流較多，我們將每次停留時間限制在兩小時<span class="gone">，以便讓更多顧客享受我們的服務。請理解並配合我們的安排。</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-3 wow animate__fadeInBottomRight" data-wow-duration="4s" data-wow-delay="0s"
+                    data-wow-iteration="1">
+                    <div class="d-flex">
+                        <div>
+                            <div class="h2 fw-800 text-center">Q:咖啡廳有什麼規則需要遵守？ </div>
+                            <p>為了確保所有顧客和貓咪的安全與舒適，請遵守以下規則：<br>
+
+                                溫柔對待貓咪<span class="gone">：請勿打擾正在休息的貓咪，特別是睡著的貓咪</span> 。<br>
+                                禁止外食<span class="gone">：請勿攜帶外來食物入內，我們提供的輕食和飲料將滿足您的需求</span> 。<br>
+                                清潔衛生<span class="gone">：請保持環境清潔，使用完桌椅後將垃圾丟入垃圾桶</span> 。<br>
+                                尊重其他顧客<span class="gone">：請保持安靜，不要大聲喧嘩，尊重其他顧客的休閒時光</span> 。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="h3 fw-600 text-center wow animate__rotateInUpRight" style="color: var(--mycolor06);"
+                    data-wow-duration="4s" data-wow-delay="0s" data-wow-iteration="1">
+                    <span class="gone">希望以上訊息能幫助您更好地了解我們的貓咪咖啡廳。</span>如有任何其他問題，歡迎隨時聯絡我們！</div>
+            </div>
+        </div>
+    </section>
+    <!-- section 10 地圖+表格 -->
+    <section id="s10" class="m-3">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 wow animate__fadeInLeft" data-wow-duration="2s" data-wow-delay="0s"
+                data-wow-iteration="1">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58270.67103268827!2d120.5775828759623!3d24.104416267591017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693d739155ce09%3A0x628a4e562445de1!2zUmF0dGFuIGNhdCBjYWZlIOiXpOeMq-WSluWVoe-8iOavj-aciOW6l-S8keiri-eci0lHKQ!5e0!3m2!1sen!2stw!4v1715760378491!5m2!1sen!2stw"
+                        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="col-md-6 wow animate__fadeInRight" data-wow-duration="2s" data-wow-delay="0s"
+                data-wow-iteration="1">
+                    <div class="mb-3">
+                        <h3>預約表格填我</h3>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">姓名</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">電話</label>
+                        <input type="phone" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Email</label>
+                        <input type="email" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">人數</label>
+                        <input type="number" min="1" max="10" value="2" class="form-control">
+                    </div>
+                    <div class="mb-1 form-check form-check-inline">
+                        <input type="radio" name="cat" id="" class="form-check-input">
+                        <label for="" class="form-check-label">不帶貓</label>
+                    </div>
+                    <div class="mb-1 form-check form-check-inline">
+                        <input type="radio" name="cat" id="" class="form-check-input">
+                        <label for="" class="form-check-label">帶貓</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="datepicker" class="form-label">預約日期</label>
+                        <input type="text" class="form-control" id="datepicker">
+                    </div>
+                    <div class="text-end mt-4">
+                        <button class="btn btn-p-02">取消</button>
+                        <button class="btn btn-p-03">確認</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section 11 -->
+    <section id="s11">
+        <div class="row">
+            <div class="col-md-6 bg-cover wow animate__fadeInUp" data-wow-duration="2s" data-wow-delay="0s" data-wow-iteration="1"  style="background-image: url(./images/cat-s11-l01.avif); " >
+                <!-- 格子裡面再插入格子-->
+                <div class="row">
+                    <div class="col-md-7 p-5 m-2 text-s11  wow animate__fadeInDown" data-wow-duration="2s" data-wow-delay="0s" data-wow-iteration="1" >
+                        <small class="badge text-s11-join p-2">加入我們</small>
+                        <h3>誠徵貓咪照顧師</h3>
+                        <p><span class="gone">工作內容：我們正在尋找熱愛貓咪並樂於與人互動的貓咪照顧師，主要負責貓咪的日常照料、幫忙出餐、環境整理及接待客人。</span> 這是一份需要細心和愛心的工作。希望你有以下特質：<br>1.細心且耐心<br>
+                            2.喜歡與動物相處<br> 3.擅長與客人溝通
+                        </p>
+                        <button class="btn btn-p-04">應徵此工作</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 bg-cover wow animate__fadeInDown" data-wow-duration="2s" data-wow-delay="0s" data-wow-iteration="1" style="background-image: url(./images/cat-s11-r01.avif);">
+                <!-- 格子裡面再插入格子-->
+                <div class="row">
+                    <div class="col-md-7 p-5 m-2 text-s11 wow animate__fadeInUp" data-wow-duration="2s" data-wow-delay="0s" data-wow-iteration="1">
+                        <small class="badge text-s11-join p-2">加入我們</small>
+                        <h3>誠徵廚房人員</h3>
+                        <p><span class="gone">工作內容：我們正在招募廚房人員，負責製作咖啡及簡易西餐餐點。要求對咖啡有相關知識並具備製作簡易西餐的技能，能夠在繁忙的環境中保持高效率。</span> 希望你有以下特質：<br>1.有沖咖啡經驗<br> 2.喜歡喝咖啡<br>
+                            3.能在壓力下工作
+                        </p>
+                        <button class="btn btn-p-04">應徵此工作</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section 12 -->
+    <section id="s12" style="background-color: var(--mycolor06);">
+        <div class="container wow animate__fadeInRight" data-wow-duration="2s" data-wow-delay="0s" data-wow-iteration="1">
+            <!-- 這樣連結才不會出現在螢幕最左邊 -->
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link disabled">Power By 跨平台班級Pam Kuo製作2024.05</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active s12-link" style="color: var(--mycolor05);" aria-current="page" href="#">回首頁</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link s12-link" style="color: var(--mycolor05);" href="#FB">Facebook</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link s12-link" style="color: var(--mycolor05);" href="#TW">Twitter</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/jquery-3.7.1.min.js"></script>
+    <script src="https://unpkg.com/counterup2@2.0.2/dist/index.js"></script>
+    <script src="./js/wow.min.js"></script>
+    <script>
+        $(function () {
+            //wowjs
+            new WOW().init();
+
+            //counter-up2 https://github.com/bfintal/Counter-Up2
+            const counterUp = window.counterUp.default
+
+            const callback = entries => {
+                entries.forEach(entry => {
+                    const el = entry.target
+                    if (entry.isIntersecting && !el.classList.contains('is-visible')) {
+                        counterUp(el, {
+                            duration: 2000,
+                            delay: 16,
+                        })
+                        el.classList.add('is-visible')
+                    }
+                })
+            }
+
+            const IO = new IntersectionObserver(callback, { threshold: 1 })
+
+            const el01 = document.querySelector('.counter01')
+            IO.observe(el01)
+
+            const el02 = document.querySelector('.counter02')
+            IO.observe(el02)
+
+            const el03 = document.querySelector('.counter03')
+            IO.observe(el03)
+
+            const el04 = document.querySelector('.counter04')
+            IO.observe(el04)
+
+        });
+    </script>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true
+            });
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.0.6/wordcloud2.min.js"></script>
+    <script>
+        var words = [
+            "貓咪咖啡廳", "溫馨", "舒適", "療癒", "放鬆", "可愛", "友善", "熱情", "愉快", "輕鬆",
+            "貓咪", "互動", "毛茸茸", "喜歡", "推薦", "棒極了", "喜悅", "好吃", "美味", "手工",
+            "天然", "純正", "超值", "一流", "服務周到", "熱飲", "冷飲", "甜點", "開心", "享受"
+        ];
+
+        function generateWordCloud() {
+            var displayWords;
+            var weightFactorValue;
+
+            if (window.innerWidth < 768) {
+                // 小於 768 僅顯示 5 到 10 個詞
+                var randomCount = Math.floor(Math.random() * 6) + 5;
+                displayWords = words.slice(0, randomCount);
+                weightFactorValue = 3; // 增加關鍵字顯示大小
+            } else {
+                displayWords = words;
+                weightFactorValue = 1; // 標準關鍵字顯示大小
+            }
+
+            var wordArray = displayWords.map(function (word) {
+                return [word, Math.floor(Math.random() * 60) + 10]; // 隨機生成文字大小
+            });
+
+            WordCloud(document.getElementById('word-cloud'), {
+                list: wordArray,
+                gridSize: Math.round(16 * $('#word-cloud').width() / 1024),
+                weightFactor: function (size) {
+                    return size * weightFactorValue * $('#word-cloud').width() / 1024;
+                },
+                fontFamily: 'Times, serif',
+                color: 'random-dark',
+                rotateRatio: 0.5,
+                rotationSteps: 2,
+                backgroundColor: 'RGBA(248, 249, 250, var(--bs-bg-opacity, 1))'
+            });
+        }
+
+        $(window).on('resize', function () {
+            $('#word-cloud').empty(); // 清空已有的文字雲
+            generateWordCloud(); // 重新生成文字雲
+        });
+
+        $(document).ready(function () {
+            generateWordCloud();
+        });
+    </script>
+</body>
+
+</html>
+
+
